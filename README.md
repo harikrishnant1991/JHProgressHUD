@@ -53,3 +53,4 @@ The HUD might not show if you try to display the loader in a `ViewController`'s 
 
 ## License
 
+This code is distributed under the terms and conditions of the [MIT license](https://github.com/harikrishnant1991/JHProgressHUD/blob/master/LICENSE).
