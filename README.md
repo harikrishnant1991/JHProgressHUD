@@ -2,6 +2,11 @@
 
 JHProgressHUD is an iOS class written in Swift to display a translucent HUD with an indicator and/or labels while work is being done in a background thread. The HUD is meant as a replacement for the private UIKit UIProgressHUD.
 
+## Screenshots
+
+[![](https://raw.githubusercontent.com/harikrishnant1991/JHProgressHUD/master/Screenshots/thumb_no_title.png)](https://raw.githubusercontent.com/harikrishnant1991/JHProgressHUD/master/Screenshots/screenshot_no_title.png)
+[![](https://raw.githubusercontent.com/harikrishnant1991/JHProgressHUD/master/Screenshots/thumb_with_title.png)](https://raw.githubusercontent.com/harikrishnant1991/JHProgressHUD/master/Screenshots/screenshot_with_title.png)
+
 ## Adding MBProgressHUD to your project
 
 ### Source Files
