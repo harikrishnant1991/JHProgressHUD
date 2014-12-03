@@ -7,7 +7,7 @@ JHProgressHUD is an iOS class written in Swift to display a translucent HUD with
 [![](https://raw.githubusercontent.com/harikrishnant1991/JHProgressHUD/master/Screenshots/thumb_no_title.png)](https://github.com/harikrishnant1991/JHProgressHUD/blob/master/Screenshots/screenshot_no_title.png)
 [![](https://raw.githubusercontent.com/harikrishnant1991/JHProgressHUD/master/Screenshots/thumb_with_title.png)](https://github.com/harikrishnant1991/JHProgressHUD/blob/master/Screenshots/screenshot_with_title.png)
 
-## Adding MBProgressHUD to your project
+## Adding JHProgressHUD to your project
 
 ### Source Files
 
