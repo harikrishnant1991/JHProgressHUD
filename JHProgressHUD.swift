@@ -3,7 +3,7 @@
 //  JHProgressHUD
 //
 //  Created by Harikrishnan on 02/12/14.
-//  Copyright (c) 2014 3E IT SOLUTIONS. All rights reserved.
+//  Copyright (c) 2014 Harikrishnan T. All rights reserved.
 //
 
 import UIKit
