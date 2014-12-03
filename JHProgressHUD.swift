@@ -54,22 +54,28 @@ class JHProgressHUD: UIView
         if title != nil && title != ""
         {
             setTitleLabel(title!)
+            titleLabel!.frame = CGRectMake(0, 0, getLabelSize().width, getLabelSize().height)
         }
         if footer != nil && title != ""
         {
             setFooterLabel(footer!)
+            footerLabel!.frame = CGRectMake(0, 0, getLabelSize().width, getLabelSize().height)
         }
-        titleLabel!.frame = CGRectMake(0, 0, getLabelSize().width, getLabelSize().height)
-        footerLabel!.frame = CGRectMake(0, 0, getLabelSize().width, getLabelSize().height)
         setBackGround(self)
-        titleLabel!.frame.origin = getHeaderOrigin(backGroundView!)
-        titleLabel?.adjustsFontSizeToFitWidth = true
-        footerLabel!.frame.origin = getFooterOrigin(backGroundView!)
-        footerLabel?.adjustsFontSizeToFitWidth = true
+        if title != nil && title != ""
+        {
+            titleLabel!.frame.origin = getHeaderOrigin(backGroundView!)
+            titleLabel?.adjustsFontSizeToFitWidth = true
+            backGroundView?.addSubview(titleLabel!)
+        }
+        if footer != nil && title != ""
+        {
+            footerLabel!.frame.origin = getFooterOrigin(backGroundView!)
+            footerLabel?.adjustsFontSizeToFitWidth = true
+            backGroundView?.addSubview(footerLabel!)
+        }
         progressIndicator?.frame.origin = getIndicatorOrigin(backGroundView!, activityIndicatorView: progressIndicator!)
         backGroundView?.addSubview(progressIndicator!)
-        backGroundView?.addSubview(titleLabel!)
-        backGroundView?.addSubview(footerLabel!)
         view.addSubview(self)
     }
     
@@ -164,7 +170,15 @@ class JHProgressHUD: UIView
     
     private func getBackGroundFrame(view : UIView) -> CGRect
     {
-        var side = progressIndicator!.frame.height + titleLabel!.frame.width
+        var side = progressIndicator!.frame.height
+        if titleLabel?.text != nil && titleLabel?.text != ""
+        {
+            side = progressIndicator!.frame.height + titleLabel!.frame.width
+        }
+        else if (footerLabel?.text != nil && footerLabel?.text != "")
+        {
+            side = progressIndicator!.frame.height + footerLabel!.frame.width
+        }
         var originX = view.center.x - (side/2)
         var originY = view.center.y - (side/2)
         return CGRectMake(originX, originY, side, side)
