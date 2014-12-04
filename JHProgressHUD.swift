@@ -11,10 +11,15 @@ import UIKit
 class JHProgressHUD: UIView
 {
     
-    var backGroundView : UIView?
-    var progressIndicator : UIActivityIndicatorView?
-    var titleLabel : UILabel?
-    var footerLabel : UILabel?
+    private var backGroundView : UIView?
+    private var progressIndicator : UIActivityIndicatorView?
+    private var titleLabel : UILabel?
+    private var footerLabel : UILabel?
+    
+    var headerColor : UIColor
+    var footerColor : UIColor
+    var backGroundColor : UIColor
+    var loaderColor : UIColor
 
     class var sharedHUD : JHProgressHUD {
     struct Static {
@@ -30,16 +35,28 @@ class JHProgressHUD: UIView
     override init()
     {
         //Initialising Code
+        headerColor = UIColor.whiteColor()
+        footerColor = UIColor.whiteColor()
+        backGroundColor = UIColor.blackColor()
+        loaderColor = UIColor.whiteColor()
         super.init()
     }
 
     required init(coder aDecoder: NSCoder)
     {
+        headerColor = UIColor.whiteColor()
+        footerColor = UIColor.whiteColor()
+        backGroundColor = UIColor.blackColor()
+        loaderColor = UIColor.whiteColor()
         super.init(coder: aDecoder)
     }
     
     override init(frame: CGRect)
     {
+        headerColor = UIColor.whiteColor()
+        footerColor = UIColor.whiteColor()
+        backGroundColor = UIColor.blackColor()
+        loaderColor = UIColor.whiteColor()
         super.init(frame: frame)
     }
     
@@ -120,7 +137,7 @@ class JHProgressHUD: UIView
         backGroundView = UIView(frame: getBackGroundFrame(self))
         backGroundView?.backgroundColor = UIColor.clearColor()
         var translucentView = UIView(frame: backGroundView!.bounds)
-        translucentView.backgroundColor = UIColor.blackColor()
+        translucentView.backgroundColor = backGroundColor
         translucentView.alpha = 0.85
         translucentView.tag = 1001;
         translucentView.layer.cornerRadius = 15.0
@@ -137,6 +154,7 @@ class JHProgressHUD: UIView
         }
         progressIndicator = UIActivityIndicatorView(activityIndicatorStyle: .WhiteLarge)
         progressIndicator?.activityIndicatorViewStyle = UIActivityIndicatorViewStyle.WhiteLarge
+        progressIndicator?.color = loaderColor
         progressIndicator?.backgroundColor = UIColor.clearColor()
         progressIndicator?.startAnimating()
     }
@@ -150,7 +168,7 @@ class JHProgressHUD: UIView
         titleLabel = UILabel()
         titleLabel?.text = text
         titleLabel?.font = self.boldFontWithFont(titleLabel?.font)
-        titleLabel?.textColor = UIColor.whiteColor()
+        titleLabel?.textColor = headerColor
         titleLabel?.textAlignment = .Center
     }
     
@@ -162,7 +180,7 @@ class JHProgressHUD: UIView
         }
         footerLabel = UILabel()
         footerLabel?.text = text
-        footerLabel?.textColor = UIColor.whiteColor()
+        footerLabel?.textColor = footerColor
         footerLabel?.textAlignment = .Center
     }
     
