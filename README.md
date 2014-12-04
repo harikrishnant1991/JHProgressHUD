@@ -54,6 +54,15 @@ To hide the loader, you can call the following function from any class. The HUD 
 JHProgressHUD.sharedHUD.hide()
 ```
 
+You can also change the colors of different elements of the HUD using the following four properties:
+
+```Swift
+JHProgressHUD.sharedHUD.headerColor = UIColor.redColor() // Changes the color of the title text
+JHProgressHUD.sharedHUD.footerColor = UIColor.greenColor() // Changes the color  of the footer text
+JHProgressHUD.sharedHUD.backGroundColor = UIColor.blueColor() // Changes the color of the translucent background
+JHProgressHUD.sharedHUD.loaderColor = UIColor.yellowColor() // Changes the color of the loading indicator
+```
+
 The HUD might not show if you try to display the loader in a `ViewController`'s `viewDidLoad()` method, since adding subviews maynot always work in the `viewDidLoad()`. It is prefered to show the HUD at least only after the `viewWillAppear()` is called. The HUD blocks the user interaction in the underlying view or window once it is shown, till it is hidden.
 
 ## License
