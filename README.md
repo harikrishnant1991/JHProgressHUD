@@ -45,7 +45,7 @@ JHProgressHUD.sharedHUD.showInView(self.view)
 To show the HUD without any header and footer text added to a window:
 
 ```Swift
-JHProgressHUD.sharedHUD.showInWindow(self.view)
+JHProgressHUD.sharedHUD.showInWindow(aWindow)
 ```
 
 To hide the loader, you can call the following function from any class. The HUD will be removed from any view it is shown in:
