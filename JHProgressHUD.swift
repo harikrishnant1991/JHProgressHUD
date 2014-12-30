@@ -73,7 +73,7 @@ class JHProgressHUD: UIView
             setTitleLabel(title!)
             titleLabel!.frame = CGRectMake(0, 0, getLabelSize().width, getLabelSize().height)
         }
-        if footer != nil && title != ""
+        if footer != nil && footer != ""
         {
             setFooterLabel(footer!)
             footerLabel!.frame = CGRectMake(0, 0, getLabelSize().width, getLabelSize().height)
@@ -85,7 +85,7 @@ class JHProgressHUD: UIView
             titleLabel?.adjustsFontSizeToFitWidth = true
             backGroundView?.addSubview(titleLabel!)
         }
-        if footer != nil && title != ""
+        if footer != nil && footer != ""
         {
             footerLabel!.frame.origin = getFooterOrigin(backGroundView!)
             footerLabel?.adjustsFontSizeToFitWidth = true
