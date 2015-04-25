@@ -32,14 +32,14 @@ class JHProgressHUD: UIView
         return Static.instance!
     }
     
-    override init()
+    init()
     {
         //Initialising Code
         headerColor = UIColor.whiteColor()
         footerColor = UIColor.whiteColor()
         backGroundColor = UIColor.blackColor()
         loaderColor = UIColor.whiteColor()
-        super.init()
+        super.init(frame: CGRectZero)
     }
 
     required init(coder aDecoder: NSCoder)
@@ -240,7 +240,7 @@ class JHProgressHUD: UIView
     // MARK: -Set Font
     func boldFontWithFont(font : UIFont?) -> UIFont
     {
-        var fontDescriptor : UIFontDescriptor = font!.fontDescriptor().fontDescriptorWithSymbolicTraits(.TraitBold)
+        var fontDescriptor : UIFontDescriptor = font!.fontDescriptor().fontDescriptorWithSymbolicTraits(.TraitBold)!
         return UIFont(descriptor: fontDescriptor, size: 0)
     }
     
