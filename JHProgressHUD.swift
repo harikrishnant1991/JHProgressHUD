@@ -68,6 +68,7 @@ class JHProgressHUD: UIView
         self.hide()
         self.frame = view.frame
         setIndicator()
+        
         if title != nil && title != ""
         {
             setTitleLabel(title!)
@@ -188,7 +189,8 @@ class JHProgressHUD: UIView
     
     private func getBackGroundFrame(view : UIView) -> CGRect
     {
-        var side = progressIndicator!.frame.height
+        let sideMargin:CGFloat = 20.0
+        var side = progressIndicator!.frame.height + sideMargin
         if titleLabel?.text != nil && titleLabel?.text != ""
         {
             side = progressIndicator!.frame.height + titleLabel!.frame.width
