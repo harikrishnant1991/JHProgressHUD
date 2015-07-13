@@ -69,24 +69,24 @@ class JHProgressHUD: UIView
         self.frame = view.frame
         setIndicator()
         
-        if title != nil && !self.isCleanedStringEmpty(title)
+        if title != nil && !isCleanedStringEmpty(title)
         {
             setTitleLabel(title!)
             titleLabel!.frame = CGRectMake(0, 0, getLabelSize().width, getLabelSize().height)
         }
-        if footer != nil && !self.isCleanedStringEmpty(footer)
+        if footer != nil && !isCleanedStringEmpty(footer)
         {
             setFooterLabel(footer!)
             footerLabel!.frame = CGRectMake(0, 0, getLabelSize().width, getLabelSize().height)
         }
         setBackGround(self)
-        if title != nil && !self.isCleanedStringEmpty(title)
+        if title != nil && !isCleanedStringEmpty(title)
         {
             titleLabel!.frame.origin = getHeaderOrigin(backGroundView!)
             titleLabel?.adjustsFontSizeToFitWidth = true
             backGroundView?.addSubview(titleLabel!)
         }
-        if footer != nil && !self.isCleanedStringEmpty(footer)
+        if footer != nil && !isCleanedStringEmpty(footer)
         {
             footerLabel!.frame.origin = getFooterOrigin(backGroundView!)
             footerLabel?.adjustsFontSizeToFitWidth = true
@@ -191,11 +191,11 @@ class JHProgressHUD: UIView
     {
         let sideMargin:CGFloat = 20.0
         var side = progressIndicator!.frame.height + sideMargin
-        if titleLabel?.text != nil && !self.isCleanedStringEmpty(titleLabel?.text)
+        if titleLabel?.text != nil && !isCleanedStringEmpty(titleLabel?.text)
         {
             side = progressIndicator!.frame.height + titleLabel!.frame.width
         }
-        else if (footerLabel?.text != nil && !self.isCleanedStringEmpty(footerLabel?.text))
+        else if (footerLabel?.text != nil && !isCleanedStringEmpty(footerLabel?.text))
         {
             side = progressIndicator!.frame.height + footerLabel!.frame.width
         }
