@@ -11,82 +11,73 @@ import UIKit
 class JHProgressHUD: UIView
 {
     
-    private var backGroundView : UIView?
-    private var progressIndicator : UIActivityIndicatorView?
-    private var titleLabel : UILabel?
-    private var footerLabel : UILabel?
+    fileprivate var backGroundView : UIView?
+    fileprivate var progressIndicator : UIActivityIndicatorView?
+    fileprivate var titleLabel : UILabel?
+    fileprivate var footerLabel : UILabel?
     
     var headerColor : UIColor
     var footerColor : UIColor
     var backGroundColor : UIColor
     var loaderColor : UIColor
-
-    class var sharedHUD : JHProgressHUD {
-    struct Static {
-        static var instance : JHProgressHUD?
-        static var token : dispatch_once_t = 0
-        }
-        dispatch_once(&Static.token) {
-            Static.instance = JHProgressHUD()
-        }
-        return Static.instance!
-    }
+    
+    static let sharedHUD = JHProgressHUD()
     
     init()
     {
         //Initialising Code
-        headerColor = UIColor.whiteColor()
-        footerColor = UIColor.whiteColor()
-        backGroundColor = UIColor.blackColor()
-        loaderColor = UIColor.whiteColor()
-        super.init(frame: CGRectZero)
+        headerColor = UIColor.white
+        footerColor = UIColor.white
+        backGroundColor = UIColor.black
+        loaderColor = UIColor.white
+        super.init(frame: CGRect.zero)
     }
-
+    
     required init(coder aDecoder: NSCoder)
     {
-        headerColor = UIColor.whiteColor()
-        footerColor = UIColor.whiteColor()
-        backGroundColor = UIColor.blackColor()
-        loaderColor = UIColor.whiteColor()
-        super.init(coder: aDecoder)
+        headerColor = UIColor.white
+        footerColor = UIColor.white
+        backGroundColor = UIColor.black
+        loaderColor = UIColor.white
+        super.init(coder: aDecoder)!
     }
     
     override init(frame: CGRect)
     {
-        headerColor = UIColor.whiteColor()
-        footerColor = UIColor.whiteColor()
-        backGroundColor = UIColor.blackColor()
-        loaderColor = UIColor.whiteColor()
+        headerColor = UIColor.white
+        footerColor = UIColor.white
+        backGroundColor = UIColor.black
+        loaderColor = UIColor.white
         super.init(frame: frame)
     }
     
     // MARK: -Public Methods
     
     // Show the loader added to the mentioned view with the provided title and footer texts
-    func showInView(view : UIView, withHeader title : String?, andFooter footer : String?)
+    func showInView(_ view : UIView, withHeader title : String?, andFooter footer : String?)
     {
         self.hide()
         self.frame = view.frame
         setIndicator()
         
-        if title != nil && !isCleanedStringEmpty(title)
+        if title != nil && !isCleanedStringEmpty(title!)
         {
             setTitleLabel(title!)
-            titleLabel!.frame = CGRectMake(0, 0, getLabelSize().width, getLabelSize().height)
+            titleLabel!.frame = CGRect(x: 0, y: 0, width: getLabelSize().width, height: getLabelSize().height)
         }
-        if footer != nil && !isCleanedStringEmpty(footer)
+        if footer != nil && !isCleanedStringEmpty(footer!)
         {
             setFooterLabel(footer!)
-            footerLabel!.frame = CGRectMake(0, 0, getLabelSize().width, getLabelSize().height)
+            footerLabel!.frame = CGRect(x: 0, y: 0, width: getLabelSize().width, height: getLabelSize().height)
         }
         setBackGround(self)
-        if title != nil && !isCleanedStringEmpty(title)
+        if title != nil && !isCleanedStringEmpty(title!)
         {
             titleLabel!.frame.origin = getHeaderOrigin(backGroundView!)
             titleLabel?.adjustsFontSizeToFitWidth = true
             backGroundView?.addSubview(titleLabel!)
         }
-        if footer != nil && !isCleanedStringEmpty(footer)
+        if footer != nil && !isCleanedStringEmpty(footer!)
         {
             footerLabel!.frame.origin = getFooterOrigin(backGroundView!)
             footerLabel?.adjustsFontSizeToFitWidth = true
@@ -98,19 +89,19 @@ class JHProgressHUD: UIView
     }
     
     // Show the loader added to the mentioned window with the provided title and footer texts
-    func showInWindow(window : UIWindow, withHeader title : String?, andFooter footer : String?)
+    func showInWindow(_ window : UIWindow, withHeader title : String?, andFooter footer : String?)
     {
         self.showInView(window, withHeader: title, andFooter: footer)
     }
     
     // Show the loader added to the mentioned view with no title and footer texts
-    func showInView(view : UIView)
+    func showInView(_ view : UIView)
     {
         self.showInView(view, withHeader: nil, andFooter: nil)
     }
     
     // Show the loader added to the mentioned window with no title and footer texts
-    func showInWindow(window : UIWindow)
+    func showInWindow(_ window : UIWindow)
     {
         self.showInView(window, withHeader: nil, andFooter: nil)
     }
@@ -127,17 +118,17 @@ class JHProgressHUD: UIView
     
     // MARK: -Set view properties
     
-    private func setBackGround(view : UIView)
+    fileprivate func setBackGround(_ view : UIView)
     {
         if backGroundView?.superview != nil
         {
             backGroundView?.removeFromSuperview()
-            var aView = backGroundView?.viewWithTag(1001) as UIView?
+            let aView = backGroundView?.viewWithTag(1001) as UIView?
             aView?.removeFromSuperview()
         }
         backGroundView = UIView(frame: getBackGroundFrame(self))
-        backGroundView?.backgroundColor = UIColor.clearColor()
-        var translucentView = UIView(frame: backGroundView!.bounds)
+        backGroundView?.backgroundColor = UIColor.clear
+        let translucentView = UIView(frame: backGroundView!.bounds)
         translucentView.backgroundColor = backGroundColor
         translucentView.alpha = 0.85
         translucentView.tag = 1001;
@@ -147,20 +138,20 @@ class JHProgressHUD: UIView
         self.addSubview(backGroundView!)
     }
     
-    private func setIndicator()
+    fileprivate func setIndicator()
     {
         if progressIndicator?.superview != nil
         {
             progressIndicator?.removeFromSuperview()
         }
-        progressIndicator = UIActivityIndicatorView(activityIndicatorStyle: .WhiteLarge)
-        progressIndicator?.activityIndicatorViewStyle = UIActivityIndicatorViewStyle.WhiteLarge
+        progressIndicator = UIActivityIndicatorView(activityIndicatorStyle: .whiteLarge)
+        progressIndicator?.activityIndicatorViewStyle = UIActivityIndicatorViewStyle.whiteLarge
         progressIndicator?.color = loaderColor
-        progressIndicator?.backgroundColor = UIColor.clearColor()
+        progressIndicator?.backgroundColor = UIColor.clear
         progressIndicator?.startAnimating()
     }
     
-    private func setTitleLabel(text : String)
+    fileprivate func setTitleLabel(_ text : String)
     {
         if titleLabel?.superview != nil
         {
@@ -170,10 +161,10 @@ class JHProgressHUD: UIView
         titleLabel?.text = text
         titleLabel?.font = self.boldFontWithFont(titleLabel?.font)
         titleLabel?.textColor = headerColor
-        titleLabel?.textAlignment = .Center
+        titleLabel?.textAlignment = .center
     }
     
-    private func setFooterLabel(text : String)
+    fileprivate func setFooterLabel(_ text : String)
     {
         if footerLabel?.superview != nil
         {
@@ -182,83 +173,83 @@ class JHProgressHUD: UIView
         footerLabel = UILabel()
         footerLabel?.text = text
         footerLabel?.textColor = footerColor
-        footerLabel?.textAlignment = .Center
+        footerLabel?.textAlignment = .center
     }
     
     // MARK: -Get Frame
     
-    private func getBackGroundFrame(view : UIView) -> CGRect
+    fileprivate func getBackGroundFrame(_ view : UIView) -> CGRect
     {
         let sideMargin:CGFloat = 20.0
         var side = progressIndicator!.frame.height + sideMargin
-        if titleLabel?.text != nil && !isCleanedStringEmpty(titleLabel?.text)
+        if titleLabel?.text != nil && !isCleanedStringEmpty((titleLabel?.text)!)
         {
             side = progressIndicator!.frame.height + titleLabel!.frame.width
         }
-        else if (footerLabel?.text != nil && !isCleanedStringEmpty(footerLabel?.text))
+        else if (footerLabel?.text != nil && !isCleanedStringEmpty((footerLabel?.text)!))
         {
             side = progressIndicator!.frame.height + footerLabel!.frame.width
         }
-        var originX = view.center.x - (side/2)
-        var originY = view.center.y - (side/2)
-        return CGRectMake(originX, originY, side, side)
+        let originX = view.center.x - (side/2)
+        let originY = view.center.y - (side/2)
+        return CGRect(x: originX, y: originY, width: side, height: side)
     }
     
     // MARK: Get Size
     
-    private func getLabelSize() -> CGSize
+    fileprivate func getLabelSize() -> CGSize
     {
-        var width = progressIndicator!.frame.width * 3
-        var height = progressIndicator!.frame.height / 1.5
-        return CGSizeMake(width, height)
+        let width = progressIndicator!.frame.width * 3
+        let height = progressIndicator!.frame.height / 1.5
+        return CGSize(width: width, height: height)
     }
     
     // MARK: -Get Origin
     
-    private func getIndicatorOrigin(view : UIView, activityIndicatorView indicator : UIActivityIndicatorView) -> CGPoint
+    fileprivate func getIndicatorOrigin(_ view : UIView, activityIndicatorView indicator : UIActivityIndicatorView) -> CGPoint
     {
-        var side = indicator.frame.size.height
-        var originX = (view.bounds.width/2) - (side/2)
-        var originY = (view.bounds.height/2) - (side/2)
-        return CGPointMake(originX, originY)
+        let side = indicator.frame.size.height
+        let originX = (view.bounds.width/2) - (side/2)
+        let originY = (view.bounds.height/2) - (side/2)
+        return CGPoint(x: originX, y: originY)
     }
     
-    private func getHeaderOrigin(view : UIView) -> CGPoint
+    fileprivate func getHeaderOrigin(_ view : UIView) -> CGPoint
     {
-        var width = titleLabel!.frame.size.width
-        var originX = (view.bounds.width/2) - (width/2)
-        return CGPointMake(originX, 1)
+        let width = titleLabel!.frame.size.width
+        let originX = (view.bounds.width/2) - (width/2)
+        return CGPoint(x: originX, y: 1)
     }
     
-    private func getFooterOrigin(view : UIView) -> CGPoint
+    fileprivate func getFooterOrigin(_ view : UIView) -> CGPoint
     {
-        var width = footerLabel!.frame.width
-        var height = footerLabel!.frame.height
-        var originX = (view.bounds.width/2) - (width/2)
-        var originY = view.frame.height - (height + 1)
-        return CGPointMake(originX, originY)
+        let width = footerLabel!.frame.width
+        let height = footerLabel!.frame.height
+        let originX = (view.bounds.width/2) - (width/2)
+        let originY = view.frame.height - (height + 1)
+        return CGPoint(x: originX, y: originY)
     }
     
-    private func isCleanedStringEmpty(string: String) -> Bool
+    fileprivate func isCleanedStringEmpty(_ string: String) -> Bool
     {
-        let cleanString = string.stringByTrimmingCharactersInSet(whiteSpaceAndNewlineCharacterSet)
+        let cleanString = string.trimmingCharacters(in: .whitespacesAndNewlines)
         return cleanString.isEmpty
     }
     
     // MARK: -Set Font
-    func boldFontWithFont(font : UIFont?) -> UIFont
+    func boldFontWithFont(_ font : UIFont?) -> UIFont
     {
-        var fontDescriptor : UIFontDescriptor = font!.fontDescriptor().fontDescriptorWithSymbolicTraits(.TraitBold)!
+        let fontDescriptor : UIFontDescriptor = font!.fontDescriptor.withSymbolicTraits(.traitBold)!
         return UIFont(descriptor: fontDescriptor, size: 0)
     }
     
     /*
-    // Only override drawRect: if you perform custom drawing.
-    // An empty implementation adversely affects performance during animation.
-    override func drawRect(rect: CGRect)
-    {
-        // Drawing code
-    }
-    */
-
+     // Only override drawRect: if you perform custom drawing.
+     // An empty implementation adversely affects performance during animation.
+     override func drawRect(rect: CGRect)
+     {
+     // Drawing code
+     }
+     */
+    
 }
